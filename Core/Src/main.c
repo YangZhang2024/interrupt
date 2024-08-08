@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "delay.h"
+#include "oled.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -81,7 +82,8 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+    delay_init(72);
+    OLED_Init();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -92,10 +94,38 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+//    OLED_Init();
+
+    /*在(0, 0)位置显示字符'A'，字体大小为8*16点阵*/
+    OLED_ShowChar(0, 0, 'A', OLED_8X16);
+
+    /*在(16, 0)位置显示字符串"Hello World!"，字体大小为8*16点阵*/
+    OLED_ShowString(16, 0, "Hello World!", OLED_8X16);
+
+    /*在(0, 18)位置显示字符'A'，字体大小为6*8点阵*/
+    OLED_ShowChar(0, 18, 'A', OLED_6X8);
+
+    /*在(16, 18)位置显示字符串"Hello World!"，字体大小为6*8点阵*/
+    OLED_ShowString(16, 18, "Hello World!", OLED_6X8);
+
+    /*在(0, 28)位置显示数字12345，长度为5，字体大小为6*8点阵*/
+    OLED_ShowNum(0, 28, 12345, 5, OLED_6X8);
+
+    /*在(40, 28)位置显示有符号数字-66，长度为2，字体大小为6*8点阵*/
+    OLED_ShowSignedNum(40, 28, -66, 2, OLED_6X8);
+
+    /*在(70, 28)位置显示十六进制数字0xA5A5，长度为4，字体大小为6*8点阵*/
+    OLED_ShowHexNum(70, 28, 0xA5A5, 4, OLED_6X8);
+
+    /*在(0, 38)位置显示二进制数字0xA5，长度为8，字体大小为6*8点阵*/
+    OLED_ShowBinNum(0, 38, 0xA5, 8, OLED_6X8);
+    OLED_Update();
+
   while (1)
   {
     /* USER CODE END WHILE */
-
+      HAL_Delay(500);
+      HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -153,7 +183,6 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
