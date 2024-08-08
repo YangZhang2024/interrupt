@@ -36,7 +36,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-
+volatile uint16_t counter;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/

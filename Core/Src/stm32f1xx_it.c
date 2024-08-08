@@ -229,11 +229,11 @@ void EXTI15_10_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-    HAL_Delay(20);
     if (GPIO_Pin == KEY1_DOWN_Pin) {
         HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, 1);
     } else if (GPIO_Pin == KEY_UP_Pin) {
-        HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, 0);
+        HAL_GPIO_TogglePin(LED0_GPIO_Port, LED0_Pin);
+        counter++;
     }
 }
 
